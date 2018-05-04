@@ -50,11 +50,11 @@ class Uploader extends React.Component {
       <div>
         <form onChange={this.handleChange}>
           <input name="name" placeholder="Name" value={this.state.name}></input><br></br>
-          <input name="description" type="text-area" placeholder="Description" value={this.state.description}></input>
+          <input name="description" type="textarea" placeholder="Description" value={this.state.description}></input>
         </form>
         <ReactFilestack
           apikey={api_key}
-          buttonText="Upload Song"
+          buttonText="Upload Video"
           buttonClass="classname"
           onSuccess={this.handleSubmit}
         />
