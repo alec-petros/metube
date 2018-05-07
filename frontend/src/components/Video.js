@@ -11,6 +11,7 @@ class Video extends React.Component {
         <Player src={this.props.video.url} className="video-player" fluid={false} height={500}>
         </Player>
         <CommentContainer auth={this.props.auth} videoId={this.props.video.id} />
+        <button id={this.props.video.id} onClick={this.props.deleteVideo}>Delete Video</button>
       </div>
     )
   }
