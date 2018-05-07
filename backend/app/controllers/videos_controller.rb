@@ -41,7 +41,14 @@ class VideosController < ApplicationController
   end
 
   def comments
-    render json: @video.comments
+    comment_obj = @video.comments.map do |comment|
+      {
+        text: comment.text,
+        created_at: comment.created_at,
+        username: comment.user.username
+      }
+    end
+    render json: comment_obj
   end
 
   private

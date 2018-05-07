@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  skip_before_action :authenticate!
+
   # GET /comments
   def index
     @comments = Comment.all
@@ -9,7 +11,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   def show
-    render json: @comment
+    set_comment
+    render json: CommentSerializer.new(@comment).serializable_hash
   end
 
   # POST /comments
