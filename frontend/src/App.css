@@ -22,7 +22,22 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.video {
+  margin: 20px;
+  outline-color: black;
+  outline-style: solid;
+  float: left;
+  height: 500px;
+  width: 90%;
+}
+
+.video-player {
+  display: inline-block;
+  width: 400px;
+}
+
+.comment-container {
+  display: inline-block;
+  float: right;
+  width: 30%
 }

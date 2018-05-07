@@ -5,12 +5,22 @@ const api_key = "AHe7lVMVWSVycM21THpXwz"
 const video_url = "http://localhost:3000/videos"
 const client = Filestack.init('api_key');
 
+const options = {
+  accept: 'video/*',
+  maxFiles: 1,
+  storeTo: {
+    location: 's3',
+  },
+};
+
 
 class Uploader extends React.Component {
 
   state = {
     name: "",
-    description: ""
+    description: "",
+    handle: "",
+    url: ""
   }
 
   handleChange = (e) => {
@@ -25,8 +35,15 @@ class Uploader extends React.Component {
     }
   }
 
-  handleSubmit = (resp) => {
-    if (this.state.name && this.state.description) {
+  handleUpload = (resp) => {
+    this.setState({
+      handle: resp.filesUploaded[0].handle,
+      url: resp.filesUploaded[0].url
+    })
+  }
+
+  handleSubmit = () => {
+    if (this.state.name && this.state.description && this.state.url) {
       fetch(video_url, {
         method: "POST",
         headers: {"content-type": "application/json"},
@@ -34,15 +51,15 @@ class Uploader extends React.Component {
           video: {
             name: this.state.name,
             description: this.state.description,
-            handle: resp.filesUploaded[0].handle,
-            url: resp.filesUploaded[0].url
+            handle: this.state.handle,
+            url: this.state.url,
+            user_id: 1
           }
         })
       }).then(r => r.json()).then(json => console.log(json))
     } else {
-      alert("Please enter name and description")
+      alert("Please complete all fields")
     }
-
   }
 
   render() {
@@ -54,10 +71,12 @@ class Uploader extends React.Component {
         </form>
         <ReactFilestack
           apikey={api_key}
+          options={options}
           buttonText="Upload Video"
           buttonClass="classname"
-          onSuccess={this.handleSubmit}
-        />
+          onSuccess={this.handleUpload}
+        /> {this.state.url ? this.state.name : null} <br></br>
+        <button onClick={this.handleSubmit}>Submit</button><br></br>
       </div>
     )
   }
