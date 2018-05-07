@@ -32,7 +32,9 @@ class CommentContainer extends React.Component {
         video_id: this.props.videoId,
         text: this.state.commentText
       }})
-    }).then(r => r.json()).then(console.log)
+    }).then(r => r.json()).then(json=>this.setState({
+      comments: [...this.state.comments, json],
+      commentText: ""}))
   }
 
   render() {

@@ -1,25 +1,33 @@
 import React from 'react';
 import Video from '../components/Video'
 
-const url = "http://localhost:3000/videos"
+
 
 class VidContainer extends React.Component {
 
-  state = {
-    videos: []
-  }
+  // state = {
+  //   videos: []
+  // }
 
-  componentDidMount() {
-    fetch(url)
-    .then(r => r.json())
-    .then(json => this.setState({
-      videos: json
-    }))
-  }
+  // fetchVideos(){
+  //   fetch(url)
+  //   .then(r => r.json())
+  //   .then(json => this.setState({
+  //     videos: json
+  //   }))
+  // }
+
+  // componentDidMount() {
+  //   this.fetchVideos()
+  // }
+
+  // componentDidUpdate() {
+  //   this.fetchVideos()
+  // }
 
   render() {
-    const videos = this.state.videos.map(video => {
-      return (<Video auth={this.props.auth} key={video.handle} video={video} />)
+    const videos = this.props.videos.map(video => {
+      return (<Video auth={this.props.auth} key={video.handle} video={video} deleteVideo={this.props.deleteVideo}/>)
     })
 
     return (

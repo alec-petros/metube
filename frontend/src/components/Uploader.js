@@ -60,7 +60,7 @@ class Uploader extends React.Component {
             user_id: 1
           }
         })
-      }).then(r => r.json()).then(json => console.log(json))
+      }).then(r => r.json()).then(json=>this.props.addVideo(json))
     } else {
       alert("Please complete all fields")
     }
