@@ -46,7 +46,11 @@ class Uploader extends React.Component {
     if (this.state.name && this.state.description && this.state.url) {
       fetch(video_url, {
         method: "POST",
-        headers: {"content-type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/javascript",
+          "Authorization": `Token token=${ this.props.auth.token }`
+        },
         body: JSON.stringify({
           video: {
             name: this.state.name,

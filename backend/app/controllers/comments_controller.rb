@@ -9,7 +9,6 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   def show
-    @comment.username = @comment.user.username
     render json: @comment
   end
 

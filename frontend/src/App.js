@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div className="App">
         {!localStorage.auth ? <RegisterForm authSet={ this.authFetched } /> : null}
-        <Uploader />
+        <Uploader auth={this.state.auth} />
         <VidContainer auth={this.state.auth} />
       </div>
     );
