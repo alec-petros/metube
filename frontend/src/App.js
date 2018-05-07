@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import "../node_modules/video-react/dist/video-react.css";
 import Uploader from './components/Uploader'
@@ -56,7 +55,7 @@ class App extends Component {
         "Authorization": `Token token=${ this.state.auth.token }`
       }
     }).then(this.setState({
-      videos: [...this.state.videos.filter(video=> video.id !== parseInt(videoId))]
+      videos: [...this.state.videos.filter(video=> video.id !== parseInt(videoId, 10))]
     }))
   }
 
@@ -69,10 +68,6 @@ class App extends Component {
 
     const VidContainerVar = (props) => {
       return (<VidContainer auth={this.state.auth} videos={this.state.videos} deleteVideo={this.deleteVideo}/>)
-    }
-
-    const UploaderVar = (props) => {
-      return (<Uploader auth={this.state.auth} addVideo={this.addVideo}/>)
     }
 
     const RegisterFormVar = (props) => {

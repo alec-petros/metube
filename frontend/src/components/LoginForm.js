@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthForm from './AuthForm'
-import { Route, Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 
 export default class LoginForm extends React.Component {
 

@@ -1,9 +1,8 @@
 import React from 'react';
-import Filestack from 'filestack-js'
+
 import ReactFilestack from 'filestack-react';
 const api_key = "AHe7lVMVWSVycM21THpXwz"
 const video_url = "http://localhost:3000/videos"
-const client = Filestack.init('api_key');
 
 const options = {
   accept: 'video/*',
