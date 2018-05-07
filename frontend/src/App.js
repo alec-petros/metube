@@ -36,7 +36,6 @@ class App extends Component {
   }
 
   addVideo = (newVideo) => {
-    console.log('refreshing videos')
     this.setState({
       videos: [...this.state.videos, newVideo]
     })
@@ -45,17 +44,17 @@ class App extends Component {
   deleteVideo = (e) => {
     let videoId = e.target.id
     let deleteUrl = url + `/${videoId}`
-    console.log('id to delete', deleteUrl)
     fetch(deleteUrl, {
       method: 'DELETE',
-      // headers: {
-      //   'Authorization': 
-      // }
-    }).then(r=>console.log('deleting', r.json())).then(this.setState({videos: [...this.state.videos.filter(video=> video.id !== videoId)]}))
+      headers: {
+        "Authorization": `Token token=${ this.state.auth.token }` 
+      }
+    }).then(this.setState({
+      videos: [...this.state.videos.filter(video=> video.id !== parseInt(videoId))]
+    }))
   }
 
   render() {
-    console.log('rendering App')
     return (
       <div className="App">
         {!localStorage.auth ? <RegisterForm authSet={ this.authFetched } /> : null}
