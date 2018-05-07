@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentForm from '../components/CommentForm'
-import Comment from '../components/Comment'
+import CommentComp from '../components/CommentComp'
 
 class CommentContainer extends React.Component {
 
@@ -37,10 +37,11 @@ class CommentContainer extends React.Component {
 
   render() {
 
-    const commments = this.state.comments.map(comment => <Comment comment={comment} />)
+    const comments = this.state.comments.map(comment => <CommentComp comment={comment} />)
 
     return (
       <div className="comment-container">
+        {comments}
         <CommentForm commentText={this.state.commentText} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     )
