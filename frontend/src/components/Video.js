@@ -8,10 +8,10 @@ class Video extends React.Component {
     console.log(this.props.video)
     return(
       <div className="video">
-        <Player src={this.props.video.url} className="video-player" fluid={false} height={500}>
+        <Player src={this.props.video.url} className="video-player" fluid={false} height={400}>
         </Player>
         <CommentContainer auth={this.props.auth} videoId={this.props.video.id} />
-        <button id={this.props.video.id} onClick={this.props.deleteVideo}>Delete Video</button>
+        {this.props.auth && this.props.video.user_id === this.props.auth.user_id ? <button id={this.props.video.id} onClick={this.props.deleteVideo}>Delete Video</button> : null}
       </div>
     )
   }

@@ -57,10 +57,13 @@ class Uploader extends React.Component {
             description: this.state.description,
             handle: this.state.handle,
             url: this.state.url,
-            user_id: 1
+            user_id: this.props.auth.user_id
           }
         })
-      }).then(r => r.json()).then(json=>this.props.addVideo(json))
+      }).then(r => r.json()).then(json=> {
+        this.props.addVideo(json);
+        this.props.history.push("/")
+      })
     } else {
       alert("Please complete all fields")
     }

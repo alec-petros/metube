@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import "../node_modules/video-react/dist/video-react.css";
 import Uploader from './components/Uploader'
 import VidContainer from './containers/VidContainer';
 import RegisterForm from './components/RegisterForm'
+import NavBar from './NavBar'
+import LoginForm from './components/LoginForm'
 
 const url = "http://localhost:3000/videos"
 
@@ -47,19 +53,45 @@ class App extends Component {
     fetch(deleteUrl, {
       method: 'DELETE',
       headers: {
-        "Authorization": `Token token=${ this.state.auth.token }` 
+        "Authorization": `Token token=${ this.state.auth.token }`
       }
     }).then(this.setState({
       videos: [...this.state.videos.filter(video=> video.id !== parseInt(videoId))]
     }))
   }
 
+  logout = () => {
+    localStorage.removeItem("auth")
+    this.setState({ auth: null })
+  }
+
   render() {
+
+    const VidContainerVar = (props) => {
+      return (<VidContainer auth={this.state.auth} videos={this.state.videos} deleteVideo={this.deleteVideo}/>)
+    }
+
+    const UploaderVar = (props) => {
+      return (<Uploader auth={this.state.auth} addVideo={this.addVideo}/>)
+    }
+
+    const RegisterFormVar = (props) => {
+      return (<RegisterForm authSet={ this.authFetched } />)
+    }
+
     return (
       <div className="App">
-        {!localStorage.auth ? <RegisterForm authSet={ this.authFetched } /> : null}
-        <Uploader auth={this.state.auth} addVideo={this.addVideo}/>
-        <VidContainer auth={this.state.auth} videos={this.state.videos} deleteVideo={this.deleteVideo}/>
+        <NavBar auth={this.state.auth} logout={this.logout} />
+        <div>
+          <Route exact path="/" component={ VidContainerVar } />
+          <Route path="/upload" render={ (renderProps) =>
+              <Uploader history={ renderProps.history } auth={this.state.auth} addVideo={this.addVideo}/>
+          } />
+          <Route path="/login" render={ (renderProps) =>
+              <LoginForm history={ renderProps.history } authSet={ this.authFetched } />
+          } />
+          <Route path="/register" component={ RegisterFormVar } />
+        </div>
       </div>
     );
   }

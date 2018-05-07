@@ -33,7 +33,7 @@ class CommentContainer extends React.Component {
         text: this.state.commentText
       }})
     }).then(r => r.json()).then(json=>this.setState({
-      comments: [...this.state.comments, json],
+      comments: [...this.state.comments, {...json, username: this.props.auth.username}],
       commentText: ""}))
   }
 
