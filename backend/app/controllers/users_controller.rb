@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authenticate!, only: :create
+  skip_before_action :authenticate!, only: [:create, :show]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: UserSerializer.new(@user).serialized_json
   end
 
   # POST /users
