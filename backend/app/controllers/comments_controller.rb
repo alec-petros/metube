@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  skip_before_action :authenticate!
+  skip_before_action :authenticate!, only: :show
 
   # GET /comments
   def index
