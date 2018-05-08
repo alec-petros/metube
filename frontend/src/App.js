@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  withRouter,
   Route
 } from 'react-router-dom';
 import './App.css';
@@ -18,7 +17,8 @@ const url = "http://localhost:3000/videos"
 class App extends Component {
 
   state = {
-    videos: []
+    videos: [],
+    currentVideo: null
   }
 
   fetchVideos(){
@@ -68,10 +68,14 @@ class App extends Component {
     }).then(this.setState({
       videos: [...this.state.videos.filter(video=> video.data.attributes.id !== parseInt(videoId, 10))]
     }))
-    withRouter(history => history.push('/'))
-
   }
 
+  selectVideo = (e) => {
+    let videoId = e.target.id
+    this.setState({
+      currentVideo: this.state.videos.find(video => video.id === parseInt(videoId))
+    })
+  }
 
   logout = () => {
     localStorage.removeItem("auth")
