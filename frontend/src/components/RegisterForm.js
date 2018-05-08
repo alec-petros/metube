@@ -6,7 +6,7 @@ class RegisterForm extends React.Component {
   render(){
     return (
       <div>
-        <h3>Signup</h3>
+        <h3>Register</h3>
         <AuthForm { ...this.props } url="http://localhost:3000/users" />
       </div>
     )

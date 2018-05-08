@@ -88,7 +88,7 @@ class App extends Component {
       if (video) {
         return <Video auth={this.state.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.deleteVideo}/>
       } else {
-        return 'Loading'
+        return ''
       }
     }
 
