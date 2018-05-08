@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
+  Switch,
   Route
 } from 'react-router-dom';
+import {Redirect} from 'react-router'
 import './App.css';
 import "../node_modules/video-react/dist/video-react.css";
 import Uploader from './components/Uploader'
@@ -43,18 +45,22 @@ class App extends Component {
 
   addVideo = (newVideo) => {
     let videoObj = {data: {
-      id: newVideo.id,
+      id: newVideo.data.id,
       attributes: {
-        name: newVideo.name,
-        handle: newVideo.handle,
-        url: newVideo.url,
-        user_id: newVideo.user_id
+        name: newVideo.data.attributes.name,
+        handle: newVideo.data.attributes.handle,
+        url: newVideo.data.attributes.url,
+        user_id: newVideo.data.attributes.user_id
       }
     }}
+    console.log('new video', newVideo)
+    console.log('videoObj', videoObj)
     this.setState({
       videos: [...this.state.videos, videoObj]
     })
   }
+
+
 
   deleteVideo = (e) => {
     let videoId = e.target.id
@@ -65,8 +71,9 @@ class App extends Component {
         "Authorization": `Token token=${ this.state.auth.token }`
       }
     }).then(this.setState({
-      videos: [...this.state.videos.filter(video=> video.data.attributes.id !== parseInt(videoId, 10))]
+      videos: [...this.state.videos.filter(video=> video.data.id !== videoId)]
     }))
+
   }
 
 
@@ -78,35 +85,36 @@ class App extends Component {
 
   render() {
 
-
     const VidContainerVar = (props) => {
       return (<VidContainer auth={this.state.auth} videos={this.state.videos} deleteVideo={this.deleteVideo} selectVideo={this.selectVideo}/>)
     }
 
     const selectVideo = (data) => {
       let video = this.state.videos.find(v => v.data.id == parseInt(data.match.params.id))
+      console.log('video in app', video)
       if (video) {
         return <Video auth={this.state.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.deleteVideo}/>
       } else {
-        return 'Loading'
+        return ''
       }
     }
+
 
     return (
       <div className="App">
         <NavBar auth={this.state.auth} logout={this.logout} />
         <div>
-          <Route exact path="/" component={ VidContainerVar } />
-          <Route path='/:id' component={selectVideo} />
-          <Route path="/upload" render={ (renderProps) =>
-              <Uploader history={ renderProps.history } auth={this.state.auth} addVideo={this.addVideo}/>
-          } />
-        <Route path="/register" render={ (renderProps) =>
-              <RegisterForm history={ renderProps.history } authSet={ this.authFetched } />
-          } />
-          <Route path="/login" render={ (renderProps) =>
-              <LoginForm history={ renderProps.history } authSet={ this.authFetched } />
-          } />
+            <Route exact path="/" component={ VidContainerVar } />
+            <Route path='/:id' component={selectVideo} />
+            <Route path="/upload" render={ (renderProps) =>
+                <Uploader history={ renderProps.history } auth={this.state.auth} addVideo={this.addVideo}/>
+            } />
+          <Route path="/register" render={ (renderProps) =>
+                <RegisterForm history={ renderProps.history } authSet={ this.authFetched } />
+            } />
+            <Route path="/login" render={ (renderProps) =>
+                <LoginForm history={ renderProps.history } authSet={ this.authFetched } />
+            } />
         </div>
       </div>
     );

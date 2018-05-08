@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 const VidContainer = (props) => {
 
+
     const videos = props.videos.map(video => {
-      console.log(video)
       return (<div className='video-link'>
         <div className="card mx-auto" style={{width: 18 + "rem"}}>
           <img className="card-img-top" src="/images/wiki-video.svg" alt="Card image cap" />
