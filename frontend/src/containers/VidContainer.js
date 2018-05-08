@@ -1,6 +1,5 @@
 import React from 'react';
-import Video from '../components/Video'
-
+import { Link } from 'react-router-dom';
 
 
 class VidContainer extends React.Component {
@@ -11,11 +10,16 @@ class VidContainer extends React.Component {
     console.log(this.props)
 
     const videos = this.props.videos.map(video => {
-      return (<Video auth={this.props.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.props.deleteVideo} selectVideo={this.props.selectVideo} />)
+      console.log(video)
+      return (<div className='video-link'>
+        <Link to={`/${video.data.id}`} id={video.data.id}>{video.data.attributes.name}</Link>
+        <br/>
+        </div>)
     })
 
     return (
       <div id="vid-container">
+      <h1>Videos</h1>
         {videos}
       </div>
     )
