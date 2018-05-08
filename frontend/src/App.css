@@ -23,7 +23,7 @@
 }
 
 .vid-display {
-  background-color: #429fc1;
+  background-color: #e0ffff;
 }
 
 .video-player {
@@ -33,6 +33,7 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 35px;
 }
 
 .comment-container {
@@ -40,17 +41,11 @@
   float: auto;
   text-align: auto;
   font-size: 12px;
-  width: 36%;
+  width: 50%;
   padding: 20px;
-<<<<<<< HEAD
   margin: 5px;
   background-color: #d7f7ff;
-||||||| merged common ancestors
-  margin: 5px;
-  background-color: #f7f7f7;
-=======
-  background-color: #f7f7f7;
->>>>>>> d8d2861c14b0ecdb4fa73c4f5d8561d66e8a56ce
+  border-radius: 15px;
   height: 400px;
   overflow: scroll;
 }

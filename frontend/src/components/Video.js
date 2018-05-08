@@ -5,15 +5,15 @@ import { Player } from 'video-react';
 class Video extends React.Component {
 
   render() {
-    console.log(this.props)
+    console.log('video props', this.props)
     return(
       <div className='vid-display'>
         <h1>{this.props.video.data.attributes.name}</h1>
 
-        <Player src={this.props.video.data.attributes.url} className="video-player" fluid={false} height={400}>
-
-        </Player>
+        <Player src={this.props.video.data.attributes.url} className="video-player" fluid={false} height={400} />
         <br/>
+        <p>Description: {this.props.video.data.attributes.description}</p>
+        <p>Posted by: {this.props.auth.username}</p>
         <h3>Comments:</h3>
         <CommentContainer auth={this.props.auth} comments={this.props.video.included} videoId={this.props.video.data.id} />
         <br/>

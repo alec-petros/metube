@@ -38,7 +38,6 @@ class CommentContainer extends React.Component {
 
 
   render() {
-    console.log('props', this.props)
     const comments = this.state.comments.map(comment => <CommentComp key={comment.attributes.id} comment={comment.attributes} />)
 
     return (
