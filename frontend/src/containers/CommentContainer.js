@@ -42,10 +42,12 @@ class CommentContainer extends React.Component {
 
     return (
       <div className="comment-container">
-        {comments}
+        <h3>Comments:</h3>
+        
         {this.props.auth ? 
           <CommentForm commentText={this.state.commentText} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
           : <div><Link to='/login'>Sign In</Link> Or <Link to='/register'>Register</Link> To Post Comments</div>}
+        {comments.reverse()}
       </div>
     )
   }
