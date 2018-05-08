@@ -1,10 +1,12 @@
 .App {
   text-align: center;
+  background-color: #e0ffff;
+  margin: auto;
+  width: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+#main-div {
+  margin: auto;
 }
 
 .App-header {
@@ -24,6 +26,8 @@
 
 .vid-display {
   background-color: #e0ffff;
+  font-family: 'Poppins', sans-serif;
+  padding: 40px;
 }
 
 .video-player {
@@ -34,6 +38,7 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 35px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .comment-container {
@@ -48,6 +53,7 @@
   border-radius: 15px;
   height: 400px;
   overflow: scroll;
+  font-family: 'Poppins', sans-serif;
 }
 
 .comment {
@@ -55,6 +61,7 @@
   border-radius:50px;
   padding: 5px;
   margin: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .comment-username {
@@ -62,21 +69,20 @@
 }
 
 .comment-text {
-  
+
   font-size: 18px;
 }
 
 #vid-container {
   margin: auto;
   width: 90%;
+  padding-top: 80px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 3px;
 }
 
 .delete-button {
   margin: 30px auto;
-  /*margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50px;
-  margin-top: 50px;*/
 }
 
 .card {
@@ -84,4 +90,9 @@
   width: 15%;
   margin: 10px;
   float: none;
+  background-color: #f7f7f7;
+}
+
+.navbar {
+  font-family: 'Dosis', sans-serif;
 }
