@@ -5,7 +5,7 @@ class VideosController < ApplicationController
 
   # GET /videos
   def index
-    @videos = Video.all
+    @videos = Video.all.sort_by(&:created_at).reverse
     options = {}
     options[:include] = [:comments]
     data = @videos.map do |video|
