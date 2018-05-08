@@ -10,13 +10,15 @@ import VidContainer from './containers/VidContainer';
 import RegisterForm from './components/RegisterForm'
 import NavBar from './NavBar'
 import LoginForm from './components/LoginForm'
+import Video from './components/Video'
 
 const url = "http://localhost:3000/videos"
 
 class App extends Component {
 
   state = {
-    videos: []
+    videos: [],
+    currentVideo: null
   }
 
   fetchVideos(){
@@ -59,6 +61,13 @@ class App extends Component {
     }))
   }
 
+  selectVideo = (e) => {
+    let videoId = e.target.id
+    this.setState({
+      currentVideo: this.state.videos.find(video => video.id === parseInt(videoId))
+    })
+  }
+
   logout = () => {
     localStorage.removeItem("auth")
     this.setState({ auth: null })
@@ -66,12 +75,23 @@ class App extends Component {
 
   render() {
 
+    
     const VidContainerVar = (props) => {
-      return (<VidContainer auth={this.state.auth} videos={this.state.videos} deleteVideo={this.deleteVideo}/>)
+      return (<VidContainer auth={this.state.auth} videos={this.state.videos} deleteVideo={this.deleteVideo} selectVideo={this.selectVideo}/>)
     }
 
     const RegisterFormVar = (props) => {
       return (<RegisterForm authSet={ this.authFetched } />)
+    }
+
+    const selectVideo = (data) => {
+      let video = this.state.videos.find(v => v.id === parseInt(data.match.params.id))
+      if (video) {
+        return <Video auth={this.state.auth} key={video.handle} video={video} deleteVideo={this.deleteVideo}/>
+        // return (<VidContainer auth={this.state.auth} videos={[video]} deleteVideo={this.deleteVideo}/>)
+      } else {
+        return 'Loading'
+      }
     }
 
     return (
@@ -79,6 +99,7 @@ class App extends Component {
         <NavBar auth={this.state.auth} logout={this.logout} />
         <div>
           <Route exact path="/" component={ VidContainerVar } />
+          <Route path='/:id' component={selectVideo} />
           <Route path="/upload" render={ (renderProps) =>
               <Uploader history={ renderProps.history } auth={this.state.auth} addVideo={this.addVideo}/>
           } />

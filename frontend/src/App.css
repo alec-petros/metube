@@ -29,6 +29,7 @@
   float: left;
   height: 400px;
   width: 90%;
+  min-width: 1150px;
 }
 
 .video-player {
@@ -47,6 +48,7 @@
   margin: 5px;
   background-color: #f7f7f7;
   height: 400px;
+  overflow: scroll;
 }
 
 .comment-username {
@@ -55,4 +57,8 @@
 
 #vid-container {
   margin: 20px;
+}
+
+.delete-button {
+  margin-right: 300px;
 }
