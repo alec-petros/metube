@@ -55,7 +55,8 @@
 }
 
 #vid-container {
-  margin: 20px;
+  margin: auto;
+  width: 90%;
 }
 
 .delete-button {
@@ -65,7 +66,6 @@
 .card {
   display: block;
   width: 15%;
-  margin: 0 auto; /* Added */
-  float: none; /* Added */
-  margin-bottom: 10px; /* Added */
+  margin: 10px;
+  float: none;
 }
