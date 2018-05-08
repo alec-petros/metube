@@ -7,7 +7,11 @@ class VidContainer extends React.Component {
   render() {
 
     const videos = this.props.videos.map(video => {
-      return (<Link to={`/${video.id}`} id={video.id}>{video.name}</Link>)
+      console.log(video)
+      return (<div className='video-link'>
+        <Link to={`/${video.data.id}`} id={video.data.id}>{video.data.attributes.name}</Link>
+        <br/>
+        </div>)
     })
 
     return (

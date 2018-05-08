@@ -84,7 +84,7 @@ class App extends Component {
     }
 
     const selectVideo = (data) => {
-      let video = this.state.videos.find(v => v.id === parseInt(data.match.params.id))
+      let video = this.state.videos.find(v => v.data.id == parseInt(data.match.params.id))
       if (video) {
         return <Video auth={this.state.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.deleteVideo}/>
       } else {
