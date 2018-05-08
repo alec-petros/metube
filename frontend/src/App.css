@@ -61,3 +61,11 @@
 .delete-button {
   margin-right: 300px;
 }
+
+.card {
+  display: block;
+  width: 15%;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+}

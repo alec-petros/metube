@@ -2,25 +2,33 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-class VidContainer extends React.Component {
+const VidContainer = (props) => {
 
-    render() {
-      const videos = this.props.videos.map(video => {
-        return (<div className='video-link'>
-          <Link to={`/${video.data.id}`} id={video.data.id}>{video.data.attributes.name}</Link>
-          <br/>
-          </div>)
-      })
-
-      return (
-        <div id="vid-container">
-        <h1>Videos</h1>
-          {videos}
+    const videos = props.videos.map(video => {
+      console.log(video)
+      return (<div className='video-link'>
+        <div className="card mx-auto" style={{width: 18 + "rem"}}>
+          <img className="card-img-top" src="/images/play.png" alt="Card image cap" />
+          <div className="card-body">
+            <h5 className="card-title">{video.data.attributes.name}</h5>
+            <p className="card-text">{video.data.attributes.id}</p>
+            <a href={`/${video.data.id}`} className="btn btn-primary">Go To Video</a>
+          </div>
         </div>
-      ) 
-    }
+      </div>)
+    })
 
-  }
+    return (
+      <div id="vid-container">
+        <h1>Videos</h1>
+        <div className="ui four column grid">
+          <div className="row">
+              {videos}
+          </div>
+        </div>
+
+      </div>
+    )
 }
 
 export default VidContainer
