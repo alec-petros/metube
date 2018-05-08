@@ -24,9 +24,11 @@ class VideosController < ApplicationController
   # POST /videos
   def create
     @video = Video.new(video_params)
+    options = {}
+    options[:include] = [:comments]
 
     if @video.save
-      render json: @video, status: :created, location: @video
+      render json: VideoSerializer.new(@video, options).serialized_json, status: :created, location: @video
     else
       render json: @video.errors, status: :unprocessable_entity
     end

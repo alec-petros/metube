@@ -78,13 +78,9 @@ class App extends Component {
 
   render() {
 
-    
+
     const VidContainerVar = (props) => {
       return (<VidContainer auth={this.state.auth} videos={this.state.videos} deleteVideo={this.deleteVideo} selectVideo={this.selectVideo}/>)
-    }
-
-    const RegisterFormVar = (props) => {
-      return (<RegisterForm authSet={ this.authFetched } />)
     }
 
     const selectVideo = (data) => {
@@ -105,10 +101,12 @@ class App extends Component {
           <Route path="/upload" render={ (renderProps) =>
               <Uploader history={ renderProps.history } auth={this.state.auth} addVideo={this.addVideo}/>
           } />
+        <Route path="/register" render={ (renderProps) =>
+              <RegisterForm history={ renderProps.history } authSet={ this.authFetched } />
+          } />
           <Route path="/login" render={ (renderProps) =>
               <LoginForm history={ renderProps.history } authSet={ this.authFetched } />
           } />
-          <Route path="/register" component={ RegisterFormVar } />
         </div>
       </div>
     );
