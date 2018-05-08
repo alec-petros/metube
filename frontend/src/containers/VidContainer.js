@@ -8,10 +8,10 @@ const VidContainer = (props) => {
     const videos = props.videos.map(video => {
       return (<div className='video-link'>
         <div className="card mx-auto" style={{width: 18 + "rem"}}>
-          <img className="card-img-top" src="/images/play.png" alt="Card image cap" />
+          <img className="card-img-top" src="/images/wiki-video.svg" alt="Card image cap" />
           <div className="card-body">
             <h5 className="card-title">{video.data.attributes.name}</h5>
-            <p className="card-text">{video.data.attributes.id}</p>
+            <p className="card-text">{video.data.attributes.description}</p>
             <a href={`/${video.data.id}`} className="btn btn-primary">Go To Video</a>
           </div>
         </div>

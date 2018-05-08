@@ -103,7 +103,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar auth={this.state.auth} logout={this.logout} />
-        <div>
+        <div id="main-div">
             <Route exact path="/" component={ VidContainerVar } />
             <Route path='/:id' component={selectVideo} />
             <Route path="/upload" render={ (renderProps) =>
