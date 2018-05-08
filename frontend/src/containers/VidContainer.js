@@ -7,7 +7,7 @@ class VidContainer extends React.Component {
 
   render() {
     const videos = this.props.videos.map(video => {
-      return (<Video auth={this.props.auth} key={video.handle} video={video} deleteVideo={this.props.deleteVideo}/>)
+      return (<Video auth={this.props.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.props.deleteVideo}/>)
     })
 
     return (

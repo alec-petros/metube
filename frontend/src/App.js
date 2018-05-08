@@ -55,7 +55,7 @@ class App extends Component {
         "Authorization": `Token token=${ this.state.auth.token }`
       }
     }).then(this.setState({
-      videos: [...this.state.videos.filter(video=> video.id !== parseInt(videoId, 10))]
+      videos: [...this.state.videos.filter(video=> video.data.attributes.id !== parseInt(videoId, 10))]
     }))
   }
 

@@ -9,12 +9,6 @@ class CommentContainer extends React.Component {
     commentText: ""
   }
 
-  componentDidMount() {
-    fetch(`http://localhost:3000/videos/${this.props.videoId}/comments`)
-    .then(r => r.json())
-    .then(json => this.setState({comments: json}))
-  }
-
   handleChange = (e) => {
     this.setState({commentText: e.target.value})
   }
@@ -39,7 +33,7 @@ class CommentContainer extends React.Component {
 
   render() {
 
-    const comments = this.state.comments.map(comment => <CommentComp key={comment.id} comment={comment} />)
+    const comments = this.props.comments.map(comment => <CommentComp key={comment.attributes.id} comment={comment.attributes} />)
 
     return (
       <div className="comment-container">

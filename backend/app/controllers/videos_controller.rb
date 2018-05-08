@@ -6,13 +6,19 @@ class VideosController < ApplicationController
   # GET /videos
   def index
     @videos = Video.all
-
-    render json: @videos
+    options = {}
+    options[:include] = [:comments]
+    data = @videos.map do |video|
+      VideoSerializer.new(video, options).serializable_hash
+    end
+    render json: data
   end
 
   # GET /videos/1
   def show
-    render json: @video
+    options = {}
+    options[:include] = [:comments]
+    render json: VideoSerializer.new(@video, options).serialized_json
   end
 
   # POST /videos
@@ -41,14 +47,16 @@ class VideosController < ApplicationController
   end
 
   def comments
-    comment_obj = @video.comments.map do |comment|
-      {
-        text: comment.text,
-        created_at: comment.created_at,
-        username: comment.user.username
-      }
-    end
-    render json: comment_obj
+    # comment_obj = @video.comments.map do |comment|
+    #   {
+    #     text: comment.text,
+    #     created_at: comment.created_at,
+    #     username: comment.user.username
+    #   }
+    # end
+    options = {}
+    options[:include] = [:comments]
+    render json: VideoSerializer.new(@video, options).serialized_json
   end
 
   private
