@@ -43,8 +43,17 @@ class App extends Component {
   }
 
   addVideo = (newVideo) => {
+    let videoObj = {data: {
+      id: newVideo.id,
+      attributes: {
+        name: newVideo.name,
+        handle: newVideo.handle,
+        url: newVideo.url,
+        user_id: newVideo.user_id
+      }
+    }}
     this.setState({
-      videos: [...this.state.videos, newVideo]
+      videos: [...this.state.videos, videoObj]
     })
   }
 
@@ -57,7 +66,7 @@ class App extends Component {
         "Authorization": `Token token=${ this.state.auth.token }`
       }
     }).then(this.setState({
-      videos: [...this.state.videos.filter(video=> video.id !== parseInt(videoId, 10))]
+      videos: [...this.state.videos.filter(video=> video.data.attributes.id !== parseInt(videoId, 10))]
     }))
     withRouter(history => history.push('/'))
 
@@ -83,7 +92,7 @@ class App extends Component {
     const selectVideo = (data) => {
       let video = this.state.videos.find(v => v.id === parseInt(data.match.params.id))
       if (video) {
-        return <Video auth={this.state.auth} key={video.handle} video={video} deleteVideo={this.deleteVideo}/>
+        return <Video auth={this.state.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.deleteVideo}/>
         // return (<VidContainer auth={this.state.auth} videos={[video]} deleteVideo={this.deleteVideo}/>)
       } else {
         return 'Loading'

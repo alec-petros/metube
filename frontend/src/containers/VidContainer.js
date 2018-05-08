@@ -1,5 +1,4 @@
 import React from 'react';
-import Video from '../components/Video'
 import { Link } from 'react-router-dom';
 
 
