@@ -9,6 +9,7 @@ class Video extends React.Component {
     return(
       <div className='vid-display'>
         <h1>{this.props.video.data.attributes.name}</h1>
+
         <Player src={this.props.video.data.attributes.url} className="video-player" fluid={false} height={400}>
 
         </Player>

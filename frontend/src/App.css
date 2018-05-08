@@ -42,8 +42,15 @@
   font-size: 12px;
   width: 36%;
   padding: 20px;
+<<<<<<< HEAD
   margin: 5px;
   background-color: #d7f7ff;
+||||||| merged common ancestors
+  margin: 5px;
+  background-color: #f7f7f7;
+=======
+  background-color: #f7f7f7;
+>>>>>>> d8d2861c14b0ecdb4fa73c4f5d8561d66e8a56ce
   height: 400px;
   overflow: scroll;
 }
@@ -74,4 +81,12 @@
   margin-right: auto;
   margin-bottom: 50px;
   margin-top: 50px;*/
+}
+
+.card {
+  display: block;
+  width: 15%;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
 }
