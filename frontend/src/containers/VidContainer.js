@@ -1,13 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
-||||||| e6bba8e... progress on individual pages
-import Video from '../components/Video'
-import { Link } from 'react-router-dom';
-=======
-import Video from '../components/Video'
-
->>>>>>> parent of e6bba8e... progress on individual pages
 
 
 class VidContainer extends React.Component {
@@ -15,11 +7,12 @@ class VidContainer extends React.Component {
   render() {
 
     const videos = this.props.videos.map(video => {
-      return (<Video auth={this.props.auth} key={video.handle} video={video} deleteVideo={this.props.deleteVideo} selectVideo={this.props.selectVideo}/>)
+      return (<Link to={`/${video.id}`} id={video.id}>{video.name}</Link>)
     })
 
     return (
       <div id="vid-container">
+      <h1>Videos</h1>
         {videos}
       </div>
     )

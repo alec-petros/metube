@@ -18,7 +18,6 @@ class App extends Component {
 
   state = {
     videos: [],
-    currentVideo: null
   }
 
   fetchVideos(){
@@ -70,12 +69,7 @@ class App extends Component {
     }))
   }
 
-  selectVideo = (e) => {
-    let videoId = e.target.id
-    this.setState({
-      currentVideo: this.state.videos.find(video => video.id === parseInt(videoId))
-    })
-  }
+
 
   logout = () => {
     localStorage.removeItem("auth")
@@ -97,7 +91,6 @@ class App extends Component {
       let video = this.state.videos.find(v => v.id === parseInt(data.match.params.id))
       if (video) {
         return <Video auth={this.state.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.deleteVideo}/>
-        // return (<VidContainer auth={this.state.auth} videos={[video]} deleteVideo={this.deleteVideo}/>)
       } else {
         return 'Loading'
       }
