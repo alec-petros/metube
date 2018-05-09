@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter as Switch,
   Route
 } from 'react-router-dom';
-import {Redirect} from 'react-router'
 import './App.css';
 import "../node_modules/video-react/dist/video-react.css";
 import Uploader from './components/Uploader'
@@ -90,7 +88,7 @@ class App extends Component {
     }
 
     const selectVideo = (data) => {
-      let video = this.state.videos.find(v => v.data.id == parseInt(data.match.params.id))
+      let video = this.state.videos.find(v => v.data.id == parseInt(data.match.params.id, 10))
       console.log('video in app', video)
       if (video) {
         return <Video auth={this.state.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.deleteVideo}/>
