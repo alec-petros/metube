@@ -48,13 +48,7 @@ class App extends Component {
 
   handleSearch = (e) => {
     this.setState({
-      search: e.target.value
-    })
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.setState({
+      search: e.target.value,
       videos: this.state.allVideos.filter(video => video.data.attributes.name.toLowerCase().includes(this.state.search.toLowerCase()))
     })
   }
@@ -110,7 +104,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <NavBar auth={this.state.auth} logout={this.logout} search={this.state.search} handleChange={this.handleSearch} handleSubmit={this.handleSubmit} />
+        <NavBar auth={this.state.auth} logout={this.logout} search={this.state.search} handleChange={this.handleSearch} />
         <div id="main-div">
             <Route exact path="/" component={ VidContainerVar } />
             <Route path='/:id' component={selectVideo} />
