@@ -36,16 +36,21 @@
 
 .video-player {
   /*display: inline-block;*/
-  width: 50%;
-  height: 400px;
+  
   /*display: block;*/
   margin-left: auto;
   margin-right: auto;
   border-radius: 35px;
 
-  float: left;
+  /*float: left;*/
 
   font-family: 'Poppins', sans-serif;
+}
+
+.vid-player-container {
+  width: 50%;
+  height: 400px;
+  float: left;
 }
 
 
