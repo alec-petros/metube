@@ -47,10 +47,16 @@ class App extends Component {
   }
 
   handleSearch = (e) => {
-    this.setState({
-      search: e.target.value,
-      videos: this.state.allVideos.filter(video => video.data.attributes.name.toLowerCase().includes(this.state.search.toLowerCase()))
-    })
+    if (e.target.value !== "") {
+      this.setState({
+        search: e.target.value,
+        videos: this.state.allVideos.filter(video => video.data.attributes.name.toLowerCase().includes(this.state.search.toLowerCase()))
+      })
+    } else {
+      this.setState({
+        videos: this.state.allVideos
+      })
+    }
   }
 
   addVideo = (newVideo) => {
@@ -64,7 +70,8 @@ class App extends Component {
       }
     }}
     this.setState({
-      videos: [...this.state.videos, videoObj]
+      allVideos: [...this.state.videos, videoObj],
+      videos: this.state.allVideos
     })
   }
 
@@ -77,7 +84,8 @@ class App extends Component {
         "Authorization": `Token token=${ this.state.auth.token }`
       }
     }).then(this.setState({
-      videos: [...this.state.videos.filter(video=> video.data.id !== videoId)]
+      allVideos: [...this.state.videos.filter(video=> video.data.id !== videoId)],
+      videos: this.state.allVideos
     }))
 
   }
