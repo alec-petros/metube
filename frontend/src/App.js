@@ -47,9 +47,9 @@ class App extends Component {
   }
 
   handleSearch = (e) => {
+    this.setState({search: e.target.value})
     if (e.target.value !== "") {
       this.setState({
-        search: e.target.value,
         videos: this.state.allVideos.filter(video => video.data.attributes.name.toLowerCase().includes(this.state.search.toLowerCase()))
       })
     } else {
@@ -70,7 +70,7 @@ class App extends Component {
       }
     }}
     this.setState({
-      allVideos: [...this.state.videos, videoObj],
+      allVideos: [...this.state.allVideos, videoObj],
       videos: this.state.allVideos
     })
   }
@@ -84,7 +84,7 @@ class App extends Component {
         "Authorization": `Token token=${ this.state.auth.token }`
       }
     }).then(this.setState({
-      allVideos: [...this.state.videos.filter(video=> video.data.id !== videoId)],
+      allVideos: [...this.state.allVideos.filter(video=> video.data.id !== videoId)],
       videos: this.state.allVideos
     }))
 

@@ -19,7 +19,8 @@ class Uploader extends React.Component {
     name: "",
     description: "",
     handle: "",
-    url: ""
+    url: "",
+    filename: ""
   }
 
   handleChange = (e) => {
@@ -35,9 +36,11 @@ class Uploader extends React.Component {
   }
 
   handleUpload = (resp) => {
+    console.log(resp)
     this.setState({
       handle: resp.filesUploaded[0].handle,
-      url: resp.filesUploaded[0].url
+      url: resp.filesUploaded[0].url,
+      filename: resp.filesUploaded[0].filename
     })
   }
 
@@ -81,7 +84,7 @@ class Uploader extends React.Component {
           buttonText="Upload Video"
           buttonClass="classname"
           onSuccess={this.handleUpload}
-        /> {this.state.url ? this.state.name : null} <br></br>
+        /> {this.state.url ? this.state.filename : null} <br></br>
         <button onClick={this.handleSubmit}>Submit</button><br></br>
       </div>
     )
