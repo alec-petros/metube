@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Switch,
+  Redirect,
   Route
 } from 'react-router-dom';
 import './App.css';
@@ -11,6 +12,7 @@ import RegisterForm from './components/RegisterForm'
 import NavBar from './NavBar'
 import LoginForm from './components/LoginForm'
 import Video from './components/Video'
+import SearchContainer from './containers/SearchContainer'
 
 const url = "http://localhost:3000/videos"
 
@@ -18,13 +20,16 @@ class App extends Component {
 
   state = {
     videos: [],
+    search: "",
+    allVideos: []
   }
 
   fetchVideos(){
     fetch(url)
     .then(r => r.json())
     .then(json => this.setState({
-      videos: json
+      videos: json,
+      allVideos: json
     }))
   }
 
@@ -41,6 +46,19 @@ class App extends Component {
     this.setState({ auth });
   }
 
+  handleSearch = (e) => {
+    this.setState({
+      search: e.target.value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.setState({
+      videos: this.state.allVideos.filter(video => video.data.attributes.name.toLowerCase().includes(this.state.search.toLowerCase()))
+    })
+  }
+
   addVideo = (newVideo) => {
     let videoObj = {data: {
       id: newVideo.data.id,
@@ -51,14 +69,10 @@ class App extends Component {
         user_id: newVideo.data.attributes.user_id
       }
     }}
-    console.log('new video', newVideo)
-    console.log('videoObj', videoObj)
     this.setState({
       videos: [...this.state.videos, videoObj]
     })
   }
-
-
 
   deleteVideo = (e) => {
     let videoId = e.target.id
@@ -74,8 +88,6 @@ class App extends Component {
 
   }
 
-
-
   logout = () => {
     localStorage.removeItem("auth")
     this.setState({ auth: null })
@@ -89,7 +101,6 @@ class App extends Component {
 
     const selectVideo = (data) => {
       let video = this.state.videos.find(v => v.data.id == parseInt(data.match.params.id, 10))
-      console.log('video in app', video)
       if (video) {
         return <Video auth={this.state.auth} key={video.data.attributes.handle} video={video} deleteVideo={this.deleteVideo}/>
       } else {
@@ -97,17 +108,19 @@ class App extends Component {
       }
     }
 
-
     return (
       <div className="App">
-        <NavBar auth={this.state.auth} logout={this.logout} />
+        <NavBar auth={this.state.auth} logout={this.logout} search={this.state.search} handleChange={this.handleSearch} handleSubmit={this.handleSubmit} />
         <div id="main-div">
             <Route exact path="/" component={ VidContainerVar } />
             <Route path='/:id' component={selectVideo} />
+            <Route path="/search" render={ (renderProps) =>
+                <SearchContainer history={ renderProps.history } auth={this.state.auth} videos={this.state.searchResults} selectVideo={this.selectVideo}/>
+            } />
             <Route path="/upload" render={ (renderProps) =>
                 <Uploader history={ renderProps.history } auth={this.state.auth} addVideo={this.addVideo}/>
             } />
-          <Route path="/register" render={ (renderProps) =>
+            <Route path="/register" render={ (renderProps) =>
                 <RegisterForm history={ renderProps.history } authSet={ this.authFetched } />
             } />
             <Route path="/login" render={ (renderProps) =>
